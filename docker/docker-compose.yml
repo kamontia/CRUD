@@ -1,0 +1,23 @@
+version: '2'
+services:
+ dbserver:
+     image: mysql:5.6.40
+     ports:
+     - 9001:3306
+     hostname: dbserver
+     environment:
+         MYSQL_DATABASE: playdb
+         MYSQL_ROOT_PASSWORD: playdb_passwd
+     networks:
+      app_net:
+       ipv4_address: 172.16.0.201
+
+
+networks:
+  app_net:
+     driver: bridge
+     ipam:
+        driver: default
+        config:
+          - subnet: 172.16.0.0/24
+            gateway: 172.16.0.1
